@@ -8,13 +8,13 @@ from psycopg.rows import dict_row
 
 class MainHandler(RequestHandler):
 
-    def get(self):
+    async def get(self):
 
         self.render("test.html")
     
 class Test_request(RequestHandler):
 
-    def get(self):
+    async def get(self):
         self.render("index.html")
 
     def set_default_headers(self):
@@ -36,11 +36,7 @@ class Test_request(RequestHandler):
                 res = await acur.fetchall()
                 res = json.dumps(res, indent=4, sort_keys=True, ensure_ascii=False, default=str)
                 # await res
-    
-        # query = f"""SELECT * from {table};"""
-        # conn.execute(query)
-        # res = dict_cur.fetchall()
-        # res = json.dumps(res, indent=4, sort_keys=True, default=str, ensure_ascii=False)
+
         self.write(res)
 
 
